@@ -7,6 +7,8 @@
 /config/database.yml
 /config/ebay_client.yml
 
+/Gemfile.lock
+
 # Ignore bundler config.
 /.bundle
 
