@@ -1,0 +1,16 @@
+development: &sandbox
+  api_keys:
+    - token: 'yx......'
+      devid: '78dc71b7-f8a8-......'
+      appid: 'Matteo-.............'
+      certid: 'PRD-e.........'
+
+test:
+  <<: *sandbox
+
+production:
+  api_keys:
+    - token: 'yx......'
+      devid: '78dc71b7-f8a8-......'
+      appid: 'Matteo-.............'
+      certid: 'PRD-e.........'

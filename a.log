@@ -1,0 +1,93 @@
+I, [2016-04-13T02:22:32.920929 #53104]  INFO -- :  in dispatch ------------------
+I, [2016-04-13T02:22:32.920929 #53104]  INFO -- : name: get_my_ebay_selling
+I, [2016-04-13T02:22:32.920929 #53104]  INFO -- : ---
+HideVariations: true
+ActiveList:
+  Include: true
+  Pagination:
+    EntriesPerPage: 2
+    PageNumber: 1
+
+I, [2016-04-13T02:22:32.920929 #53104]  INFO -- : /////
+
+(start)bodyyyyy
+---
+HideVariations: true
+ActiveList:
+  Include: true
+  Pagination:
+    EntriesPerPage: 2
+    PageNumber: 1
+
+(end)bodyyyyy
+I, [2016-04-13T02:22:33.003044 #53104]  INFO -- : SOAP request Body
+
+
+: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns="urn:ebay:apis:eBLBaseComponents" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ebay:apis:eBLBaseComponents"><env:Header><urn:RequesterCredentials><urn:eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**ivQGVw**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AHk4KmAJCDowidj6x9nY+seQ**5DwDAA**AAMAAA**/iR/8UNP8S29sVe/2B+7VMCFSyhhZSX3BCyofUVA8PBPT3AFFEKNebH4MFs0XQxhJVURNaTUqmSSzDytoK0YMdM7UI3Yq9e4/IK9sFPQtN1zPh+RxvA4lv/gcl8xY0eCYQo9HxAOcc4AACNCH6A8EmqdMVoxcHBpWvh7sqk0YGw1PpTQt1zQtHkHncJ+W8EnMZbjrkF1v8MIQmPclA+nobMMi+H/PVxu95GK1gljkipVqFayDyQx7hM7lEO2QqkeB4WjncnwVC0aAug+kORrfA84DEDLtDlzyVr07LuahHtKPNxCWo0SKQP/dT0Ee4C1qoXuFCwCvy/dggFO3sPKxGSD5855+IQ1rJRS0WcQRJUAYiruCgAefn6/nM4ScZyMQ0UHIKGJkaB1yDL1Z4ifhlCS4++/R3kf+ChWEMGnrjL4eX07BsqghBLbCohEg+p5RGSYEF6no89lZnfKKox+P+ZQJWWZhjcOgMA0VHNzoWKWZK8MyqbfZp47KlRm/7wM/iITh3fqU045648PFtoLtnhJQrNXMuQDPGR2RfNx0aF4ZvrvqNSf81jDdlAGb2rZskmGem3K3cAXjTPVjXNQRjG9sl2TZLpKYk4nnKrePjvMbBeqRoTvlHXKjIZ5t96g4mFn5slo/ls3c8Rwjj9MYu6d4hx0VqIi34h5S2kLyFkwuXPJGwqDHXJ9D5caLaiWcY9iZuX1StCEPVlhwF8PcnZqYQV10iTHwfuKWl1VwC9J0r1B5v0Kp6B76/wRHmjH</urn:eBayAuthToken><urn:Credentials><urn:AppId>MatteoAr-MatteoAr-PRD-3e7ff2694-392981ce</urn:AppId><urn:DevId>78dc71b7-f8a8-4ff6-beaf-72547db8e468</urn:DevId><urn:AuthCert>PRD-e7ff26948afd-066a-4e5a-a932-b6f5</urn:AuthCert></urn:Credentials></urn:RequesterCredentials></env:Header><env:Body><ns:GetMyeBaySellingRequest><ns:HideVariations>true</ns:HideVariations><ns:ActiveList><ns:Include>true</ns:Include><ns:Pagination><ns:EntriesPerPage>2</ns:EntriesPerPage><ns:PageNumber>1</ns:PageNumber></ns:Pagination></ns:ActiveList><ns:Version>949</ns:Version><ns:WarningLevel>Low</ns:WarningLevel><ns:ErrorLanguage>en_US</ns:ErrorLanguage></ns:GetMyeBaySellingRequest></env:Body></env:Envelope>
+
+
+
+I, [2016-04-13T02:22:33.003495 #53104]  INFO -- : SOAP request: https://api.ebay.com/wsapi?appid=MatteoAr-MatteoAr-PRD-3e7ff2694-392981ce&siteid=0&version=949&routing=default&callname=GetMyeBaySelling
+I, [2016-04-13T02:22:33.003495 #53104]  INFO -- : SOAPAction: "GetMyeBaySelling", Content-Type: text/xml;charset=UTF-8, Content-Length: 1910
+I, [2016-04-13T02:22:34.511547 #53104]  INFO -- : SOAP response (status 200)
+----------------------------------------------------------------------------------------------------------------------------------
+getItem for 161919276396
+--------------------------------------------------------------------
+111111
+<EbayClient::Api>
+222222
+I, [2016-04-13T02:22:34.562095 #53104]  INFO -- :  in dispatch ------------------
+I, [2016-04-13T02:22:34.562095 #53104]  INFO -- : name: get_item
+I, [2016-04-13T02:22:34.562095 #53104]  INFO -- : ---
+ItemID: '161919276396'
+HideVariations: true
+
+I, [2016-04-13T02:22:34.562095 #53104]  INFO -- : /////
+
+(start)bodyyyyy
+---
+ItemID: '161919276396'
+HideVariations: true
+
+(end)bodyyyyy
+I, [2016-04-13T02:22:34.615501 #53104]  INFO -- : SOAP request Body
+
+
+: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns="urn:ebay:apis:eBLBaseComponents" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ebay:apis:eBLBaseComponents"><env:Header><urn:RequesterCredentials><urn:eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**ivQGVw**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AHk4KmAJCDowidj6x9nY+seQ**5DwDAA**AAMAAA**/iR/8UNP8S29sVe/2B+7VMCFSyhhZSX3BCyofUVA8PBPT3AFFEKNebH4MFs0XQxhJVURNaTUqmSSzDytoK0YMdM7UI3Yq9e4/IK9sFPQtN1zPh+RxvA4lv/gcl8xY0eCYQo9HxAOcc4AACNCH6A8EmqdMVoxcHBpWvh7sqk0YGw1PpTQt1zQtHkHncJ+W8EnMZbjrkF1v8MIQmPclA+nobMMi+H/PVxu95GK1gljkipVqFayDyQx7hM7lEO2QqkeB4WjncnwVC0aAug+kORrfA84DEDLtDlzyVr07LuahHtKPNxCWo0SKQP/dT0Ee4C1qoXuFCwCvy/dggFO3sPKxGSD5855+IQ1rJRS0WcQRJUAYiruCgAefn6/nM4ScZyMQ0UHIKGJkaB1yDL1Z4ifhlCS4++/R3kf+ChWEMGnrjL4eX07BsqghBLbCohEg+p5RGSYEF6no89lZnfKKox+P+ZQJWWZhjcOgMA0VHNzoWKWZK8MyqbfZp47KlRm/7wM/iITh3fqU045648PFtoLtnhJQrNXMuQDPGR2RfNx0aF4ZvrvqNSf81jDdlAGb2rZskmGem3K3cAXjTPVjXNQRjG9sl2TZLpKYk4nnKrePjvMbBeqRoTvlHXKjIZ5t96g4mFn5slo/ls3c8Rwjj9MYu6d4hx0VqIi34h5S2kLyFkwuXPJGwqDHXJ9D5caLaiWcY9iZuX1StCEPVlhwF8PcnZqYQV10iTHwfuKWl1VwC9J0r1B5v0Kp6B76/wRHmjH</urn:eBayAuthToken><urn:Credentials><urn:AppId>MatteoAr-MatteoAr-PRD-3e7ff2694-392981ce</urn:AppId><urn:DevId>78dc71b7-f8a8-4ff6-beaf-72547db8e468</urn:DevId><urn:AuthCert>PRD-e7ff26948afd-066a-4e5a-a932-b6f5</urn:AuthCert></urn:Credentials></urn:RequesterCredentials></env:Header><env:Body><ns:GetItemRequest><ns:ItemID>161919276396</ns:ItemID><ns:HideVariations>true</ns:HideVariations><ns:Version>949</ns:Version><ns:WarningLevel>Low</ns:WarningLevel><ns:ErrorLanguage>en_US</ns:ErrorLanguage></ns:GetItemRequest></env:Body></env:Envelope>
+
+
+
+I, [2016-04-13T02:22:34.615501 #53104]  INFO -- : SOAP request: https://api.ebay.com/wsapi?appid=MatteoAr-MatteoAr-PRD-3e7ff2694-392981ce&siteid=0&version=949&routing=default&callname=GetItem
+I, [2016-04-13T02:22:34.615501 #53104]  INFO -- : SOAPAction: "GetItem", Content-Type: text/xml;charset=UTF-8, Content-Length: 1764
+I, [2016-04-13T02:22:36.687567 #53104]  INFO -- : SOAP response (status 200)
+412
+getItem for 161979293293
+--------------------------------------------------------------------
+111111
+<EbayClient::Api>
+222222
+I, [2016-04-13T02:22:36.756564 #53104]  INFO -- :  in dispatch ------------------
+I, [2016-04-13T02:22:36.756564 #53104]  INFO -- : name: get_item
+I, [2016-04-13T02:22:36.756564 #53104]  INFO -- : ---
+ItemID: '161979293293'
+HideVariations: true
+
+I, [2016-04-13T02:22:36.756564 #53104]  INFO -- : /////
+
+(start)bodyyyyy
+---
+ItemID: '161979293293'
+HideVariations: true
+
+(end)bodyyyyy
+I, [2016-04-13T02:22:36.803422 #53104]  INFO -- : SOAP request Body
+
+
+: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns="urn:ebay:apis:eBLBaseComponents" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ebay:apis:eBLBaseComponents"><env:Header><urn:RequesterCredentials><urn:eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**ivQGVw**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AHk4KmAJCDowidj6x9nY+seQ**5DwDAA**AAMAAA**/iR/8UNP8S29sVe/2B+7VMCFSyhhZSX3BCyofUVA8PBPT3AFFEKNebH4MFs0XQxhJVURNaTUqmSSzDytoK0YMdM7UI3Yq9e4/IK9sFPQtN1zPh+RxvA4lv/gcl8xY0eCYQo9HxAOcc4AACNCH6A8EmqdMVoxcHBpWvh7sqk0YGw1PpTQt1zQtHkHncJ+W8EnMZbjrkF1v8MIQmPclA+nobMMi+H/PVxu95GK1gljkipVqFayDyQx7hM7lEO2QqkeB4WjncnwVC0aAug+kORrfA84DEDLtDlzyVr07LuahHtKPNxCWo0SKQP/dT0Ee4C1qoXuFCwCvy/dggFO3sPKxGSD5855+IQ1rJRS0WcQRJUAYiruCgAefn6/nM4ScZyMQ0UHIKGJkaB1yDL1Z4ifhlCS4++/R3kf+ChWEMGnrjL4eX07BsqghBLbCohEg+p5RGSYEF6no89lZnfKKox+P+ZQJWWZhjcOgMA0VHNzoWKWZK8MyqbfZp47KlRm/7wM/iITh3fqU045648PFtoLtnhJQrNXMuQDPGR2RfNx0aF4ZvrvqNSf81jDdlAGb2rZskmGem3K3cAXjTPVjXNQRjG9sl2TZLpKYk4nnKrePjvMbBeqRoTvlHXKjIZ5t96g4mFn5slo/ls3c8Rwjj9MYu6d4hx0VqIi34h5S2kLyFkwuXPJGwqDHXJ9D5caLaiWcY9iZuX1StCEPVlhwF8PcnZqYQV10iTHwfuKWl1VwC9J0r1B5v0Kp6B76/wRHmjH</urn:eBayAuthToken><urn:Credentials><urn:AppId>MatteoAr-MatteoAr-PRD-3e7ff2694-392981ce</urn:AppId><urn:DevId>78dc71b7-f8a8-4ff6-beaf-72547db8e468</urn:DevId><urn:AuthCert>PRD-e7ff26948afd-066a-4e5a-a932-b6f5</urn:AuthCert></urn:Credentials></urn:RequesterCredentials></env:Header><env:Body><ns:GetItemRequest><ns:ItemID>161979293293</ns:ItemID><ns:HideVariations>true</ns:HideVariations><ns:Version>949</ns:Version><ns:WarningLevel>Low</ns:WarningLevel><ns:ErrorLanguage>en_US</ns:ErrorLanguage></ns:GetItemRequest></env:Body></env:Envelope>
+
+
+
+I, [2016-04-13T02:22:36.803422 #53104]  INFO -- : SOAP request: https://api.ebay.com/wsapi?appid=MatteoAr-MatteoAr-PRD-3e7ff2694-392981ce&siteid=0&version=949&routing=default&callname=GetItem
+I, [2016-04-13T02:22:36.803422 #53104]  INFO -- : SOAPAction: "GetItem", Content-Type: text/xml;charset=UTF-8, Content-Length: 1764
+I, [2016-04-13T02:22:38.366118 #53104]  INFO -- : SOAP response (status 200)
+70
