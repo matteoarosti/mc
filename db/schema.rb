@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726232806) do
+ActiveRecord::Schema.define(version: 20160806223123) do
+
+  create_table "channel_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "channels", force: true do |t|
+    t.string   "name"
+    t.integer  "channel_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ebay_insertion_timelines", force: true do |t|
     t.integer  "ebay_insertion_id"
@@ -46,6 +59,21 @@ ActiveRecord::Schema.define(version: 20160726232806) do
     t.datetime "updated_at"
   end
 
+  create_table "order_rows", force: true do |t|
+    t.integer  "order_id"
+    t.string   "mc_transaction"
+    t.string   "mc_item"
+    t.string   "mc_title"
+    t.integer  "qty"
+    t.decimal  "price",                   precision: 7, scale: 2
+    t.integer  "product_id"
+    t.integer  "product_mc_id"
+    t.integer  "product_variation_id"
+    t.integer  "product_variation_mc_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "orders", force: true do |t|
     t.string   "channel"
     t.string   "order_identifier"
@@ -59,6 +87,36 @@ ActiveRecord::Schema.define(version: 20160726232806) do
     t.datetime "shipping_on_ts"
     t.date     "paid_on"
     t.datetime "paid_on_ts"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_mcs", force: true do |t|
+    t.integer  "channel_id"
+    t.integer  "product_id"
+    t.string   "mc_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_variation_mcs", force: true do |t|
+    t.integer  "product_mc_id"
+    t.string   "variation_string"
+    t.string   "name"
+    t.integer  "product_variation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_variations", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

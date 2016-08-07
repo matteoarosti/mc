@@ -2,7 +2,7 @@ class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
 
-      t.string      :channel    #EBAY|B2B|...
+      t.belongs_to  :channel
       t.string      :order_identifier
       t.decimal     :total_value, precision: 7, scale: 2
       t.decimal     :products_value, precision: 7, scale: 2
