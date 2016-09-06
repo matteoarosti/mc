@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806223123) do
+ActiveRecord::Schema.define(version: 20160826235427) do
 
   create_table "channel_types", force: true do |t|
     t.string   "name"
@@ -22,6 +22,23 @@ ActiveRecord::Schema.define(version: 20160806223123) do
   create_table "channels", force: true do |t|
     t.string   "name"
     t.integer  "channel_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "customer_mcs", force: true do |t|
+    t.integer  "channel_id"
+    t.integer  "customer_id"
+    t.string   "name"
+    t.string   "mc_id"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "customers", force: true do |t|
+    t.string   "name"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,6 +76,12 @@ ActiveRecord::Schema.define(version: 20160806223123) do
     t.datetime "updated_at"
   end
 
+  create_table "manufacturers", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "order_rows", force: true do |t|
     t.integer  "order_id"
     t.string   "mc_transaction"
@@ -75,7 +98,9 @@ ActiveRecord::Schema.define(version: 20160806223123) do
   end
 
   create_table "orders", force: true do |t|
-    t.string   "channel"
+    t.integer  "channel_id"
+    t.integer  "customer_id"
+    t.integer  "customer_mc_id"
     t.string   "order_identifier"
     t.decimal  "total_value",      precision: 7, scale: 2
     t.decimal  "products_value",   precision: 7, scale: 2
@@ -83,10 +108,10 @@ ActiveRecord::Schema.define(version: 20160806223123) do
     t.decimal  "amount_paid",      precision: 7, scale: 2
     t.date     "created_on"
     t.datetime "created_on_ts"
-    t.date     "shipping_on"
-    t.datetime "shipping_on_ts"
     t.date     "paid_on"
     t.datetime "paid_on_ts"
+    t.date     "shipping_on"
+    t.datetime "shipping_on_ts"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -101,6 +126,7 @@ ActiveRecord::Schema.define(version: 20160806223123) do
   end
 
   create_table "product_variation_mcs", force: true do |t|
+    t.integer  "channel_id"
     t.integer  "product_mc_id"
     t.string   "variation_string"
     t.string   "name"
@@ -117,6 +143,8 @@ ActiveRecord::Schema.define(version: 20160806223123) do
 
   create_table "products", force: true do |t|
     t.string   "name"
+    t.integer  "manufacturer_id"
+    t.string   "manufacturer_ref"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

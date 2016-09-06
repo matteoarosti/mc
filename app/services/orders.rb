@@ -7,7 +7,7 @@ class Orders
  	
  	channel = Channel.find(1)
 
-	p = {number_of_days: 1, order_status: 'Completed'}
+	p = {number_of_days: 3, order_status: 'Completed'}
 	
     orders =  EbayClient.api.get_orders! p
  	
@@ -33,7 +33,13 @@ class Orders
        o_on_create.created_on  = o_on_create.created_on_ts = o[:created_time]
        o_on_create.total_value     = o[:total]
        o_on_create.products_value  = o[:subtotal]
-       o_on_create.shipping_value   = o[:shipping_details][:shipping_service_options][:shipping_service_cost]         
+       o_on_create.shipping_value   = o[:shipping_details][:shipping_service_options][:shipping_service_cost]
+         
+       #ricerco cliente mc
+       c_mc = CustomerMc.find_or_create_by(channel_id: channel.id, mc_id: o[:buyer_user_id].to_s)
+       o_on_create.customer_mc_id = c_mc.id
+       o_on_create.customer_id = c_mc.customer_id
+                    
  		 end #on create order
  		 
  		 #aggiorno eventuali dati di pagamento/spedizione
@@ -98,7 +104,7 @@ class Orders
     
     
              #in base a ar_variation_string recupero ProductVariationMc
-             pv_mc = ProductVariationMc.find_or_create_by(product_mc_id: p_mc.id, variation_string: ar_variations_string) do |pv_mc_on_create|
+             pv_mc = ProductVariationMc.find_or_create_by(channel_id: channel.id, product_mc_id: p_mc.id, variation_string: ar_variations_string) do |pv_mc_on_create|
                puts "Creo nuovo ProductVariationMc"
                pv_mc_on_create.name = t[:item][:title].to_s         
              end

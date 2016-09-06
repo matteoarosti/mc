@@ -2,6 +2,7 @@ class CreateProductVariationMcs < ActiveRecord::Migration
   def change
     create_table :product_variation_mcs do |t|
 
+      t.belongs_to      :channel
       t.belongs_to      :product_mc
       t.string          :variation_string
       t.string          :name

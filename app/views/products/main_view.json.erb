@@ -1,0 +1,54 @@
+{
+ "success": true,
+ "items": [
+ {
+ 	xtype: 'panel',
+ 	layout: 'fit', flex: 1,
+ 	title: 'Articoli Mc',
+ 	items: [
+		  {
+		    xtype: 'grid',	
+			flex: 1, autoHeight: true, padding: 10, overflow: 'auto', height: 500,
+		    
+		    store: new Ext.data.Store({
+		    	autoLoad: true,
+		    	fields: [],
+		    	proxy: {
+		            url: 'products/get_rows_mc',
+		            reader: {
+		                type: 'json',
+						method: 'POST',        	                
+		                rootProperty: 'items'
+		            },
+		            paramsAsJson: true,
+					method: 'POST',
+					type: 'ajax',
+		
+					//Add these two properties
+					actionMethods: {
+						read: 'POST'
+					}        	            
+		            
+		        }
+		    }),
+		
+		    columns: [
+		        { text: 'mc-Id',  dataIndex: 'mc_id' },
+		        { text: 'Nome',   dataIndex: 'name', flex: 1 , renderer: function(value, metaData, rec, rowIndex, colIndex, store) {
+		        		if ( Ext.isEmpty(rec.get('product')) == true )
+			         		return '<span style="color: red">' + value + '</span>';
+						return '<span style="color: green">' + value + '</span>';			         		
+			        }		 }
+		    ],
+		    
+		    listeners : {
+						    itemdblclick: function(dv, rec, item, index, e) {						    	
+						    	acs_show_panel_std(dv.up('tabpanel'), '<%= url_for(:action=>'order_detail') -%>', {rec_id: rec.get('id')});						    	
+						    }, scope: this
+						}
+		    
+		  }
+	]
+  }
+ ]
+}

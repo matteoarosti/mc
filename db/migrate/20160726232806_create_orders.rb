@@ -3,6 +3,8 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
 
       t.belongs_to  :channel
+      t.belongs_to  :customer
+      t.belongs_to  :customer_mc     
       t.string      :order_identifier
       t.decimal     :total_value, precision: 7, scale: 2
       t.decimal     :products_value, precision: 7, scale: 2

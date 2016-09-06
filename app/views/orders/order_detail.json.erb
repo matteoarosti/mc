@@ -1,0 +1,50 @@
+{
+ "success": true,
+ "items": [
+ {
+ 	xtype: 'panel', closable: true,
+ 	layout: 'fit', flex: 1,
+ 	title: 'Order #<%= @item.id.to_json -%>',
+ 	items: [
+		  {
+		    xtype: 'grid',	
+			flex: 1, autoHeight: true, padding: 10, overflow: 'auto', height: 500,
+		    
+		    store: new Ext.data.Store({
+		    	autoLoad: true,
+		    	fields: [],
+		    	proxy: {
+		            url: 'orders/get_row_details',
+		            extraParams: {rec_id: <%= @item.id.to_json -%>},
+		            reader: {
+		                type: 'json',
+						method: 'POST',        	                
+		                rootProperty: 'items'
+		            },
+		            paramsAsJson: true,
+					method: 'POST',
+					type: 'ajax',
+		
+					//Add these two properties
+					actionMethods: {
+						read: 'POST'
+					}        	            
+		            
+		        }
+		    }),
+		
+		    columns: [
+		    	{ text: 'Qty',  dataIndex: 'qty', width: 70, align: 'right'},
+		        { text: 'Prodotto',  dataIndex: 'mc_title', flex: 1, renderer: function(value, metaData, rec, rowIndex, colIndex, store) {
+		        		if ( Ext.isEmpty(rec.get('product_id')) == true || Ext.isEmpty(rec.get('product_variation_id')) == true )
+			         		return '<span style="color: red">' + rec.get('mc_title') + '</span>';
+						return '<span style="color: green">' + rec.get('mc_title') + '</span>';			         		
+			        }},
+		        { text: 'Prezzo<br/>Unit.',  dataIndex: 'price', width: 100, align: 'right', renderer: euro2},
+		    ]
+		    
+		  }
+	]
+  }
+ ]
+}
