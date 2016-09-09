@@ -1,0 +1,22 @@
+{
+ "success": true,
+  	items: [
+		  {
+		    xtype: 'form', flex: 1,
+		    title: 'aaa',
+			layout: {
+			    type: 'vbox',
+			    align : 'stretch',
+			    pack  : 'start',
+			}, 
+		    defaults: {
+		     	 xtype: 'textfield',
+		     	 margin: '10 10 0 10',
+		    },		    				
+		    
+		    items: [
+		    	{xtype: 'hiddenfield', name: 'id', value: '<%= item.id -%>'}
+		    ]
+		  }
+ ]
+}

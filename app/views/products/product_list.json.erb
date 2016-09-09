@@ -15,7 +15,7 @@
 		    	autoLoad: true,
 		    	fields: [],
 		    	proxy: {
-		            url: 'products/get_rows_mc',
+		            url: 'products/get_rows',
 		            reader: {
 		                type: 'json',
 						method: 'POST',        	                
@@ -34,36 +34,33 @@
 		    }),
 		
 		    columns: [
-		        { text: 'mc-Id',  dataIndex: 'mc_id' },
-		        { text: 'Nome',   dataIndex: 'name', flex: 1 , renderer: function(value, metaData, rec, rowIndex, colIndex, store) {
-		        		if ( Ext.isEmpty(rec.get('product')) == true )
-			         		return '<span style="color: red">' + value + '</span>';
-						return '<span style="color: green">' + value + '</span>';			         		
-			        }		 }
+		        { text: 'id',  dataIndex: 'id' },
+		        { text: 'Nome',   dataIndex: 'name', flex: 1}
 		    ],
 		    
 		    listeners : {
 						    itemdblclick: function(dv, rec, item, index, e) {						    	
-						    	acs_show_panel_std(dv.up('tabpanel'), '<%= url_for(:action=>'order_detail') -%>', {rec_id: rec.get('id')});						    	
-						    }, scope: this
-						},
-
-			dockedItems:[{
+						    		acs_show_panel_std(dv.up('tabpanel'), '<%= url_for(:action=>'order_detail') -%>', {rec_id: rec.get('id')});						    	
+						    	}, scope: this
+			 }	
+		   
+		   
+			, dockedItems:[{
 			    xtype:'toolbar',
 			    dock:'top',
 			    items:[			    
 			    {
 			        xtype:'button',
-			        text:'Articoli',
+			        text:'Crea nuovo',
 			        pressed:false,
 			        handler: function(){
-			        	acs_show_panel_std(this.up('tabpanel'), '<%= url_for(:action=>'product_list') -%>');
+			        	acs_show_panel_std(this.up('tabpanel'), '<%= url_for(:action=>'product_new') -%>');
 			        }
 			    }]
 			}] 
-	
+		   
 		    
-		  },
+		  }
 		  
 		 
 		 
