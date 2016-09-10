@@ -4,7 +4,7 @@
 	{
 	    xtype: 'form'
 	    , flex: 1
-	    , title: 'Product Edit'
+	    , title: 'Product Mc Edit'
 	    , closable: true
 		, layout: {
 		    type: 'vbox',
@@ -19,8 +19,9 @@
 	    , items: [
 	    	{xtype: 'hiddenfield', name: 'id', value: '<%= item.id -%>'}
 	    	, <%= raw extjs_std_textfield('name', item) -%>
-	    	, <%= raw extjs_std_combo_model('manufacturer', item) -%>
-	    	, <%= raw extjs_std_textfield('manufacturer_ref', item) -%>
+	    	, <%= raw extjs_std_textfield('mc_id', item) -%>
+	    	, <%= raw extjs_std_combo_model('channel', item) -%>
+	    	, <%= raw extjs_std_combo_model('product', item) -%>
 	    ]
 	    
 	    , dockedItems: [{
@@ -34,7 +35,7 @@
                 	  form = this.up('form');
                 	  if (form.isValid()){	
 						  Ext.Ajax.request({
-			                    url: <%= raw url_for(:controller=>'products', :action=>'exe_save').to_json -%>,
+			                    url: <%= raw url_for(:controller=>'products', :action=>'product_mc_exe_save').to_json -%>,
 			                    waitMsg: 'Salvataggio in corso....',
 								method:'POST',                    
 			                    jsonData: {data: form.getValues()},	

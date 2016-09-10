@@ -34,8 +34,10 @@
 		    }),
 		
 		    columns: [
-		        { text: 'id',  dataIndex: 'id' },
-		        { text: 'Nome',   dataIndex: 'name', flex: 1}
+		        { text: 'id',  dataIndex: 'id' }
+		        , { text: 'Nome',   dataIndex: 'name', flex: 1}
+		        , { text: 'Produttore',   dataIndex: 'manufacturer_id', flex: 1}
+		        , { text: 'Code',   dataIndex: 'manufacturer_ref', flex: 1}
 		    ],
 		    
 		    listeners : {
@@ -50,6 +52,13 @@
 			    dock:'top',
 			    items:[			    
 			    {
+			        xtype:'button',
+			        text:'Refresh',
+			        pressed:false,
+			        handler: function(){
+			        	this.up('grid').store.load();
+			        }
+			    }, {
 			        xtype:'button',
 			        text:'Crea nuovo',
 			        pressed:false,

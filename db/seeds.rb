@@ -7,3 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 ct = ChannelType.create(name: 'EBAY')
 ch = Channel.create(channel_id: ct.id, name: 'Ebay ChicoBonitoShop')
+
+Manufacturer.create(name: 'Fruit')
+Manufacturer.create(name: 'Payper')

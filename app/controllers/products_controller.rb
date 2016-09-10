@@ -23,5 +23,38 @@ class ProductsController < ApplicationController
     
   def product_list
   end
+
+  def exe_save
+    if params[:data][:id].blank?
+      item = Product.new
+    else
+      item = Product.find(params[:data][:id])
+    end
+    params[:data].permit!
+    item.update(params[:data])
+    item.save!()
+    render json: {:success => true, :data=>[item.as_json()]}
+  end
+    
+  
+  
+  ############## products_mc ######################
+  
+  def product_mc_edit
+    render partial: "product_mc_form", locals: {item: ProductMc.find(params[:rec_id])}
+  end
+  
+  def product_mc_exe_save
+    if params[:data][:id].blank?
+      item = ProductMc.new
+    else
+      item = ProductMc.find(params[:data][:id])
+    end
+    params[:data].permit!
+    item.update(params[:data])
+    item.save!()
+    render json: {:success => true, :data=>[item.as_json()]}
+  end
+  
   
 end

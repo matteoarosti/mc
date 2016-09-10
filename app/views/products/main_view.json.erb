@@ -34,17 +34,20 @@
 		    }),
 		
 		    columns: [
-		        { text: 'mc-Id',  dataIndex: 'mc_id' },
-		        { text: 'Nome',   dataIndex: 'name', flex: 1 , renderer: function(value, metaData, rec, rowIndex, colIndex, store) {
-		        		if ( Ext.isEmpty(rec.get('product')) == true )
+		       { text: 'mc-Id',  dataIndex: 'mc_id' }
+		       , { text: 'Nome',   dataIndex: 'name', flex: 1 , renderer: function(value, metaData, rec, rowIndex, colIndex, store) {
+		        		if ( Ext.isEmpty(rec.get('product_id')) == true )
 			         		return '<span style="color: red">' + value + '</span>';
 						return '<span style="color: green">' + value + '</span>';			         		
-			        }		 }
+			        }		 
+			   }
+			   , { text: 'Prodotto',  dataIndex: 'product_id' }
+			   , { text: 'CanaleId',  dataIndex: 'channel_id' }
 		    ],
 		    
 		    listeners : {
 						    itemdblclick: function(dv, rec, item, index, e) {						    	
-						    	acs_show_panel_std(dv.up('tabpanel'), '<%= url_for(:action=>'order_detail') -%>', {rec_id: rec.get('id')});						    	
+						    	acs_show_panel_std(dv.up('tabpanel'), '<%= url_for(:controller => 'products', :action=>'product_mc_edit') -%>', {rec_id: rec.get('id')});						    	
 						    }, scope: this
 						},
 
