@@ -20,6 +20,11 @@ class ProductsController < ApplicationController
   def product_new 
     render partial: "product_form", locals: {item: Product.new}
   end
+  
+  def product_edit
+    render partial: "product_form", locals: {item: Product.find(params[:rec_id])}
+  end
+  
     
   def product_list
   end
@@ -36,6 +41,48 @@ class ProductsController < ApplicationController
     render json: {:success => true, :data=>[item.as_json()]}
   end
     
+  
+  
+  # STATISTICHE #
+  def product_stat_list
+  end
+
+  def get_stat_rows
+    counts = Product.select('products.*, sum(order_rows.qty) as s_qty, count(distinct order_id) as c_orders').joins(order_rows: :order).group('products.id, products.name')
+    
+    if (params[:filter] == 'l7d')
+      counts = counts.where('paid_on_ts >= ?', 7.days.ago)
+    end
+    if (params[:filter] == 'l1d')
+      counts = counts.where('paid_on_ts >= ?', 1.days.ago)
+    end
+    
+    
+    render json: {:success => true, :items => counts.as_json()}
+  end
+
+
+      
+  
+  # PIVOT #
+  def products_pivot
+  end
+  
+  def products_pivot_data    
+    items_db = OrderRow.select('products.id as product_id, products.name, year(paid_on) as year, week(paid_on) as week, sum(qty) as s_qty, count(*) as c_row').joins(:order, :product).group('products.id', 'products.name', 'year(paid_on)', 'week(paid_on)')
+    items = items_db.group_by(&:product_id).map{ |product_id, weeks| 
+          rw = {:product_id => product_id.to_i, :c_row => {}}
+          weeks.each do |w|
+            rw[:product_name] = w[:name]
+            rw["#{w[:year]}-W#{w[:week]}"] = w[:s_qty]
+            rw["c_row_#{w[:year]}-W#{w[:week]}"] = w[:c_row]              
+          end
+          rw
+    }     
+            
+    render json: {:success => true, :items => items}
+    
+  end
   
   
   ############## products_mc ######################

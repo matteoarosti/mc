@@ -7,7 +7,13 @@ class OrdersController < ApplicationController
     
   def get_rows
     o = Order.find(1)
-    items = Order.all
+    
+    if params[:view_type].nil?        
+      items = Order.all
+    else
+      items = Order.send("apply_filter_#{params[:view_type]}")
+    end
+    
     render json: {:success => true, :items => items.as_json(:include => {
         customer_mc: {only: [:mc_id]},
         customer: {only: [:name]}

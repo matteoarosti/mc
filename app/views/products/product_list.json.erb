@@ -4,7 +4,7 @@
  {
  	xtype: 'panel',
  	layout: 'fit', flex: 1,
- 	title: 'Articoli Mc',
+ 	title: 'Articoli',
  	closable: true,
  	items: [
 		  {
@@ -42,9 +42,9 @@
 		    
 		    listeners : {
 						    itemdblclick: function(dv, rec, item, index, e) {						    	
-						    		acs_show_panel_std(dv.up('tabpanel'), '<%= url_for(:action=>'order_detail') -%>', {rec_id: rec.get('id')});						    	
-						    	}, scope: this
-			 }	
+						    	acs_show_panel_std(dv.up('tabpanel'), '<%= url_for(:controller => 'products', :action=>'product_edit') -%>', {rec_id: rec.get('id')});						    	
+						    }, scope: this
+						}
 		   
 		   
 			, dockedItems:[{

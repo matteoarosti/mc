@@ -1,0 +1,113 @@
+<%
+#    g = PivotTable::Grid.new do |g|
+#      g.source_data  = OrderRow.joins(:order, :product).all.limit(200)
+#      g.column_name  = :paid_on_year_week
+#      g.row_name     = :product_name
+#      g.value_name   = :qty
+#    end
+#   g.build
+   
+#   columns_header = []
+#   columns_header << {text: 'Articolo', dataIndex: 'product_name', flex: 1}
+   
+#   for i in 0..7
+#   	year_week = (Time.zone.now - i.weeks).beginning_of_week.strftime("%G-W%V")
+#   	year_week_out = (Time.zone.now - i.weeks).beginning_of_week.strftime("'%g-w%V")
+#   	columns_header << {text: year_week_out, dataIndex: year_week, width: 90, align: 'right', renderer: function(value, meta, rec) {
+#            return value & '[' & rec.get('c_row') & ']';
+#        }}
+#   end
+   
+#   g.column_headers.each do |g|
+#  	columns_header << {text: g, dataIndex: g, flex: 1}
+#   end
+   
+%>
+{
+ "success": true,
+ "items": [
+ {
+ 	xtype: 'panel',
+ 	layout: 'fit', flex: 1,
+ 	title: 'Products pivot',
+ 	closable: true,
+ 	items: [
+		  {
+		    xtype: 'grid',	
+			flex: 1, autoHeight: true, padding: 10, overflow: 'auto', height: 500,
+		    
+		    store: new Ext.data.Store({
+		    	autoLoad: true,
+		    	fields: [],
+		    	proxy: {
+		            url: 'products/products_pivot_data',
+		            reader: {
+		                type: 'json',
+						method: 'POST',        	                
+		                rootProperty: 'items'
+		            },
+		            paramsAsJson: true,
+					method: 'POST',
+					type: 'ajax',
+		
+					//Add these two properties
+					actionMethods: {
+						read: 'POST'
+					}        	            
+		            
+		        }
+		    }),
+		
+		    columns: [
+  				{text: 'Articolo', dataIndex: 'product_name', flex: 1}
+   
+   				<% 
+   					for i in 0..7
+   					year_week = (Time.zone.now - i.weeks).beginning_of_week.strftime("%G-W%V")
+   					year_week_out = (Time.zone.now - i.weeks).beginning_of_week.strftime("'%g-w%V")
+   				%>	
+				   	, {text: <%= raw year_week_out.to_json -%>, dataIndex: <%= raw year_week.to_json -%>, width: 90, align: 'right', renderer: function(value, meta, rec, rowIdx, colIdx, store, view) {
+				   		if (Ext.isEmpty(value) == false) {
+							var column = view.getHeaderAtIndex(colIdx);
+							var dataIndex = column.dataIndex;				   		
+            				return value + ' [' + rec.get('c_row_' + dataIndex) + ']';
+            			}
+            			else
+            				return null;
+        			}}
+   				<% end %>
+		    
+		    ],
+		    
+		    listeners : {
+						    itemdblclick: function(dv, rec, item, index, e) {						    	
+						    		acs_show_panel_std(dv.up('tabpanel'), '<%= url_for(:action=>'order_detail') -%>', {rec_id: rec.get('id')});						    	
+						    	}, scope: this
+			 }	
+		   
+		   
+			, dockedItems:[{
+			    xtype:'toolbar',
+			    dock:'top',
+			    items:[			    
+			    {
+			        xtype:'button',
+			        text:'Refresh',
+			        pressed:false,
+			        handler: function(){
+			        	this.up('grid').store.load();
+			        }
+			    }	]
+			}] 
+		   
+		    
+		  }
+		  
+		 
+		 
+		 
+		 
+	]
+  }
+ ]
+}

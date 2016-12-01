@@ -36,7 +36,7 @@
 		    columns: [
 		    	{ text: 'Qty',  dataIndex: 'qty', width: 70, align: 'right'},
 		        { text: 'Prodotto',  dataIndex: 'mc_title', flex: 1, renderer: function(value, metaData, rec, rowIndex, colIndex, store) {
-		        		if ( Ext.isEmpty(rec.get('product_id')) == true || Ext.isEmpty(rec.get('product_variation_id')) == true )
+		        		if ( Ext.isEmpty(rec.get('product_id')) == true /* || Ext.isEmpty(rec.get('product_variation_id')) == true */ )
 			         		return '<span style="color: red">' + rec.get('mc_title') + '</span>';
 						return '<span style="color: green">' + rec.get('mc_title') + '</span>';			         		
 			        }},

@@ -16,6 +16,8 @@ class CreateOrders < ActiveRecord::Migration
       t.datetime    :paid_on_ts      
       t.date        :shipping_on
       t.datetime    :shipping_on_ts
+      t.date        :estimate_delivery_on
+      t.datetime    :estimate_delivery_on_ts
       
       t.timestamps
     end

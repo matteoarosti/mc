@@ -5,6 +5,7 @@
  	xtype: 'panel',
  	layout: 'fit', flex: 1,
  	title: 'Open',
+ 	closable: true,
  	items: [
 		  {
 		    xtype: 'grid',	
@@ -24,6 +25,8 @@
 					method: 'POST',
 					type: 'ajax',
 		
+					extraParams: {view_type: <%= raw params[:view_type].to_json -%>},
+		
 					//Add these two properties
 					actionMethods: {
 						read: 'POST'
@@ -35,13 +38,14 @@
 		    columns: [
 		        { text: 'Order-Id',  dataIndex: 'order_identifier' },
 		        { text: 'Del',  dataIndex: 'created_on' },
-		        { text: 'Cliente', width: 150,  dataIndex: 'customer_id', renderer: function(value, metaData, rec, rowIndex, colIndex, store) {
+		        { text: 'Cliente', width: 150,  dataIndex: 'customer_mc_id', renderer: function(value, metaData, rec, rowIndex, colIndex, store) {
 		        		if ( Ext.isEmpty(rec.get('customer_id')) == true )
 			         		return '<span style="color: red">' + rec.get('customer_mc').mc_id + '</span>';
 						return '<span style="color: green">' + rec.get('customer').name + '</span>';			         		
 			        }		 
 			    },
 		        { text: 'Pagato il',  dataIndex: 'paid_on' },
+		        { text: 'Consegna stimata',  dataIndex: 'estimate_delivery_on' },
 		        { text: 'Spedito il',  dataIndex: 'shipping_on' },
 		        { text: 'Products', dataIndex: 'products_value', flex: 1, align: 'right', renderer: euro2},		        
 		        { text: 'Total', dataIndex: 'total_value', flex: 1, align: 'right', renderer: euro2}
@@ -52,6 +56,31 @@
 						    	acs_show_panel_std(dv.up('tabpanel'), '<%= url_for(:action=>'order_detail') -%>', {rec_id: rec.get('id')});						    	
 						    }, scope: this
 						}
+			
+			, dockedItems:[{
+			    xtype:'toolbar',
+			    dock:'top',
+			    items:[			    
+			      {
+			        xtype:'button',
+			        text:'Aperti',
+			        pressed:false,
+			        handler: function(){
+				        	acs_show_panel_std(this.up('tabpanel'), '<%= url_for(:action=>'main_view') -%>', {view_type: 'OPEN'});
+			        }
+			      }, {
+			        xtype:'button',
+			        text:'In ritardo',
+			        pressed:false,
+			        handler: function(){
+				        	acs_show_panel_std(this.up('tabpanel'), '<%= url_for(:action=>'main_view') -%>', {view_type: 'DELIVERY_DATE_EXPIRED'});
+			        }
+			      } 
+			    ]
+			}] 						
+						
+						
+						
 		    
 		  }
 	]

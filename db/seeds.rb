@@ -10,3 +10,5 @@ ch = Channel.create(channel_id: ct.id, name: 'Ebay ChicoBonitoShop')
 
 Manufacturer.create(name: 'Fruit')
 Manufacturer.create(name: 'Payper')
+Manufacturer.create(name: 'Beechfield')
+Manufacturer.create(name: 'Awdis')

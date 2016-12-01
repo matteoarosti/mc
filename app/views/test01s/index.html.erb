@@ -1,0 +1,27 @@
+<h1>Listing test01s</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @test01s.each do |test01| %>
+      <tr>
+        <td><%= test01.title %></td>
+        <td><%= test01.price %></td>
+        <td><%= link_to 'Show', test01 %></td>
+        <td><%= link_to 'Edit', edit_test01_path(test01) %></td>
+        <td><%= link_to 'Destroy', test01, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Test01', new_test01_path %>

@@ -5,10 +5,15 @@
  	xtype: 'panel',
  	layout: 'fit', flex: 1,
  	title: 'Articoli Mc',
- 	closable: true,
+ 	closable: true, 	
  	items: [
 		  {
-		    xtype: 'grid',	
+		    xtype: 'grid',
+		    
+			viewConfig: {
+			    enableTextSelection: true
+			},
+	
 			flex: 1, autoHeight: true, padding: 10, overflow: 'auto', height: 500,
 		    
 		    store: new Ext.data.Store({
@@ -55,14 +60,44 @@
 			    xtype:'toolbar',
 			    dock:'top',
 			    items:[			    
-			    {
+			      {
 			        xtype:'button',
 			        text:'Articoli',
 			        pressed:false,
 			        handler: function(){
 			        	acs_show_panel_std(this.up('tabpanel'), '<%= url_for(:action=>'product_list') -%>');
 			        }
-			    }]
+			      }, {
+			        xtype:'button',
+			        text:'Stat. Venduti',
+			        pressed:false,
+			        handler: function(){
+			        	acs_show_panel_std(this.up('tabpanel'), '<%= url_for(:action=>'product_stat_list') -%>');
+			        }
+			      }, {
+			        xtype:'button',
+			        text:'Stat. Venduti (ultimi 7gg)',
+			        pressed:false,
+			        handler: function(){
+			        	acs_show_panel_std(this.up('tabpanel'), '<%= url_for(:action=>'product_stat_list', :filter => 'l7d') -%>');
+			        }
+			      }, {
+			        xtype:'button',
+			        text:'Stat. Venduti (ultimo g)',
+			        pressed:false,
+			        handler: function(){
+			        	acs_show_panel_std(this.up('tabpanel'), '<%= url_for(:action=>'product_stat_list', :filter => 'l1d') -%>');
+			        }
+			      }, {
+			        xtype:'button',
+			        text:'Pivot',
+			        pressed:false,
+			        handler: function(){
+			        	acs_show_panel_std(this.up('tabpanel'), '<%= url_for(:action=>'products_pivot') -%>');
+			        }
+			      }
+			      
+			    ]
 			}] 
 	
 		    
