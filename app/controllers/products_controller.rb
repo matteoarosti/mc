@@ -18,7 +18,10 @@ class ProductsController < ApplicationController
   
   
   def product_new 
-    render partial: "product_form", locals: {item: Product.new}
+    item = Product.new
+    form_from = params[:form_from] || {}
+    item.name = form_from[:name]
+    render partial: "product_form", locals: {item: item}
   end
   
   def product_edit

@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
     model_class = extjs_sc_model.to_s
     ret[:success] = true
     ret[:items] = model_class.constantize.order(model_class.constantize.combo_displayField()).limit(500)
+    
+    if !params[:filter_id].nil?
+      ret[:items] = ret[:items].where(id: params[:filter_id])
+    end  
+      
     render json: ret
   end
 
@@ -18,5 +23,24 @@ class ApplicationController < ActionController::Base
     controller_name.classify
   end  
   
-    
+  
+  def search_std
+  end
+
+  def search_std_get_data
+    ret = {}
+    model_class = extjs_sc_model.to_s
+    ret[:success] = true
+    ret[:items] = model_class.constantize.order(model_class.constantize.combo_displayField()).limit(500)
+      
+    unless params[:search_std_form].nil?
+      params[:search_std_form].each do |kp, p|
+        ret[:items] = ret[:items].where("#{kp} LIKE ?", "%#{p}%") unless p.empty?
+      end
+    end
+        
+    render json: ret
+  end
+  
+      
 end

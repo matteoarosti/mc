@@ -39,7 +39,80 @@ module ApplicationHelper
   end
   
   
+
+  ##############################################################  
+  def extjs_std_combo_model_complete(name, item, p = {}, attr = {})
+  ##############################################################    
+   field_name = name + '_id'
+   input_name = p[:input_name] || (p[:input_prefix].to_s + name + '_id')    
+   model_class = name.camelize.constantize
+ 
+   add_attr = extsj_create_attr_str(attr)
+   
+   ret_field = "
+     {
+       xtype: 'combobox', name: #{input_name.to_json}, value: #{item.send(field_name).to_json},
+       fieldLabel: #{(p[:fieldLabel] || name.humanize).to_json},
+       displayField: #{model_class.combo_displayField.to_json},
+       valueField: 'id',
+       flex: 1,
+       forceSelection: true,
+       allowBlank: #{p[:allowBlank] || false},
+       triggerAction: 'all',
+       typeAhead: true,
+       queryMode: 'local',
+       lastQuery: '',  
+       store: #{p[:store] || extjs_std_store_model(name)},
+       listeners: { //todo: merge con altri eventuali listeners
+          onSearchSelected: function(rec_id, form_from){
+              this.store.proxy.extraParams.filter_id = rec_id
+              this.store.load();
+              this.setValue(rec_id);
+              form_from.close();
+          }
+       }
+       #{add_attr}
+     }
+     "
+   
+   ret = "{
+    xtype: 'fieldcontainer',
+    layout: {type: 'hbox', align : 'stretch', pack  : 'start'}, 
+    items: [
+      #{ret_field},
+      {
+       xtype: 'button',
+       text: 'Search',
+       width: 100,
+       handler: function(){
+        acs_show_panel_std(this.up('tabpanel'), '#{root_path}#{name.pluralize}/search_std', {
+          input_id_from: this.up('fieldcontainer').down('combobox').id,
+        });
+       }   
+      }, {
+        xtype: 'button',
+        text: 'Create',
+        width: 100,
+        handler: function(){
+         acs_show_panel_std(this.up('tabpanel'), '#{root_path}#{name.pluralize}/product_new', 
+              {
+                input_id_from: this.up('fieldcontainer').down('combobox').id,
+                form_from: this.up('form').getValues()
+              },
+              {onSelectEvent2: function(){console.log('aaaaaaaaaaaaaa')}},
+              {onSelectEvent: function(){console.log('aaaaaaaaaaaaaa')}}
+           );
+        }   
+       }
+    ]
+   }
+   "
+   
+   return ret 
+  end
+ 
   
+    
   
  ###############################################################
  # UTILITY

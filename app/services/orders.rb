@@ -11,7 +11,7 @@ class Orders
   p = {mod_time_from: '2016-10-31T00:00:00.000Z', mod_time_to: '2016-10-31T23:59:59.999Z', order_status: 'Completed'}
 	
   
-  for i in -100..0
+  for i in -7..0
     puts (Time.now+i.days).at_beginning_of_day.utc.iso8601(3).to_s + " -> " + (Time.now+i.days).at_end_of_day.utc.iso8601(3).to_s 
       
     p = {mod_time_from: (Time.now+i.days).at_beginning_of_day.utc.iso8601(3), mod_time_to: (Time.now+i.days).at_end_of_day.utc.iso8601(3), order_status: 'Completed'}
@@ -89,8 +89,8 @@ class Orders
              ].join(' | ')
             
               #customer email  
-              c_mc.email = t[:buyer][:email] unless t[:buyer][:email].nil?
-              c_mc.save!
+              n.customer_mc.email = t[:buyer][:email] unless t[:buyer][:email].nil?
+              n.customer_mc.save!
               
               #estimaed delivery
               n.estimate_delivery_on = n.estimate_delivery_on_ts = t[:shipping_service_selected][:shipping_package_info][:estimated_delivery_time_max]

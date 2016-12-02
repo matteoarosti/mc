@@ -1,0 +1,82 @@
+{
+ "success": true,
+ "items": [
+ {
+ 	xtype: 'panel',
+ 	title: 'Search std',
+ 	layout: 'fit', flex: 1,
+ 	closable: true,
+ 	items: [
+		  {
+		    xtype: 'grid',	
+			flex: 1, autoHeight: true, padding: 10, overflow: 'auto', height: 500,
+		    
+		    store: new Ext.data.Store({
+		    	autoLoad: true,
+		    	fields: [],
+		    	proxy: {
+		            url: <%= raw url_for(:action=>'search_std_get_data').to_json -%>,
+		            reader: {
+		                type: 'json',
+						method: 'POST',        	                
+		                rootProperty: 'items'
+		            },
+		            paramsAsJson: true,
+					method: 'POST',
+					type: 'ajax',
+		
+					//Add these two properties
+					actionMethods: {
+						read: 'POST'
+					}        	            
+		            
+		        }
+		    }),
+		
+		    columns: [
+		        { text: 'id',  dataIndex: 'id' , width: 50}
+		        , { text: 'Nome',   dataIndex: 'name', flex: 1}
+		        , { text: 'Produttore',   dataIndex: 'manufacturer_id', width: 150}
+		        , { text: 'Code',   dataIndex: 'manufacturer_ref', width: 150}
+		    ],
+		    
+		    listeners : {
+						    itemdblclick: function(dv, rec, item, index, e) {						    	
+						    	active_panel = this.up('panel');
+						    	combo_from = Ext.getCmp(<%= raw params[:input_id_from].to_json -%>);
+						    	combo_from.fireEvent('onSearchSelected', rec.id, active_panel); //Non usato						    	
+						    }
+						}
+		   
+			, dockedItems:[{
+			    xtype:'toolbar',
+			    dock:'top',
+			    items:[
+
+				  {
+				   xtype: 'form',
+				   layout: {type: 'hbox', align : 'stretch', pack  : 'start'},
+				   items: [			    
+				    {xtype: 'textfield', name: 'name', fieldLabel: 'Nome', labelAlign: 'right'},
+				    {xtype: 'textfield', name: 'manufacturer_ref', fieldLabel: 'Codice', labelAlign: 'right'},
+				    ,{
+				        xtype:'button',
+				        text:'Search',
+				        pressed:false,
+				        handler: function(){
+				        	console.log(this.up('grid'));
+				        	this.up('grid').store.proxy.extraParams.search_std_form = this.up('form').getValues();
+				        	this.up('grid').store.load();
+				        }
+				    }
+				  ]
+				 }  
+			    
+			   ]
+			}] 
+		   
+		    
+		  } 	
+ 	] //items
+ }
+]}
