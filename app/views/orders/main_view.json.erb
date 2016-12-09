@@ -44,6 +44,77 @@
 						return '<span style="color: green">' + rec.get('customer').name + '</span>';			         		
 			        }		 
 			    },
+			    { text: 'Info Cliente', renderer: function(value, metaData, rec, rowIndex, colIndex, store) {
+			    
+			    		v = '';
+			    		
+			    		if (rec.get('customer_mc').count_orders.orders > 1){
+			    		
+			    			shipped_orders_color = '#d3d3d3';
+			    			to_ship_orders_color = '#d3d3d3';
+			    		
+			    			shipped_orders = rec.get('customer_mc').count_orders.orders - rec.get('customer_mc').count_orders.orders_OPEN;
+			    			to_ship_orders = rec.get('customer_mc').count_orders.orders_OPEN;
+			    			
+			    			if (shipped_orders > 0) shipped_orders_color = 'green';
+			    			if (to_ship_orders > 0) to_ship_orders_color = '#FFD700';
+			    			
+				    		v = v + '<span class="fa-stack fa-lg">';
+						    v = v + '<i class="fa fa-circle fa-stack-2x" style="color:' + shipped_orders_color + ';"></i>';
+						    v = v + '<i class="fa fa-inverse fa-stack-1x">' + shipped_orders + '</i>';
+						    v = v + '</span>';
+						    
+				    		v = v + '<span class="fa-stack fa-lg">';
+						    v = v + '<i class="fa fa-circle fa-stack-2x" style="color:' + to_ship_orders_color + ';"></i>';
+						    v = v + '<i class="fa fa-inverse fa-stack-1x">' + rec.get('customer_mc').count_orders.orders_OPEN + '</i>';
+						    v = v + '</span>';						    			    		
+			    		}
+			    
+			    		return v;
+			    
+			    		v = '<span class="fa-stack fa-lg">';
+					    v = v + '<i class="fa fa-circle fa-stack-2x" style="color:green;"></i>';
+					    v = v + '<i class="fa fa-inverse fa-stack-1x">3</i>';
+					    v = v + '</span>';
+					    
+					   	v = v + '<span class="fa-stack fa-lg">';
+					    v = v + '<i class="fa fa-circle fa-stack-2x"></i>';
+					    v = v + '<i class="fa fa-inverse fa-stack-1x" style="color: red;">113</i>';
+					    v = v + '</span>';
+					    
+					    return v;
+			    
+			    		var loc_grid = this;
+			    		var id = Ext.id();
+			    		
+						setTimeout(function() {
+			            			          
+			                ok_img = 'fa-check-circle';
+			            
+			                var buttonOK = Ext.create('Ext.button.Button', {
+			                	
+								text: '<i class="fa ' + ok_img + ' fa-2x">1</i>',
+		                		scale: 'small',			                    
+			                    handler: function(button, b, c, d, e) {
+			                    }
+			                 });
+
+			                if (Ext.get(id)) {
+			                    buttonOK.render(Ext.get(id));
+			                }			                 
+			             }, 1);
+			            return '<div id="' + id + '"></div>';
+			                     
+			    
+			    		v = '';
+				    	if (rec.get('customer_mc').count_orders.orders > 1){
+			        		v = rec.get('customer_mc').count_orders.orders;
+			        		v = v + ' / ' + rec.get('customer_mc').count_orders.orders_OPEN;
+			        		v = '<i class="fa fa-truck fa-3x">' + v + '</i>';
+			        	}
+		        		return v;			         		
+			        }		 
+			    },
 		        { text: 'Pagato il',  dataIndex: 'paid_on' },
 		        { text: 'Consegna stimata',  dataIndex: 'estimate_delivery_on' },
 		        { text: 'Spedito il',  dataIndex: 'shipping_on' },

@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
 
   def main_view
-    #render json: {:success => true, :items => {:html => 'aaaaa'}}
   end
 
     
@@ -15,9 +14,10 @@ class OrdersController < ApplicationController
     end
     
     render json: {:success => true, :items => items.as_json(:include => {
-        customer_mc: {only: [:mc_id]},
-        customer: {only: [:name]}
-    })}
+          customer_mc: {only: [:mc_id], :methods => [:count_orders]},
+          customer: {only: [:name]}
+        }
+    )}
   end
 
   
