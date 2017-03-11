@@ -10,6 +10,8 @@ class CreateEbayInsertions < ActiveRecord::Migration
       t.string      :category_name_3, :limit=>50
       t.string      :category_name_4, :limit=>50
       t.string      :category_name_5, :limit=>50
+      t.string      :category_name_6, :limit=>50
+      t.string      :category_name_7, :limit=>50
       t.string      :created_from,  :limit=>'10'    #es: Manuale, Prestashop
       t.decimal     :price,          precision: 10, scale: 2
       t.decimal     :shipping_cost,  precision: 10, scale: 2

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129181553) do
+ActiveRecord::Schema.define(version: 20170306234249) do
 
   create_table "channel_types", force: true do |t|
     t.string   "name"
@@ -102,16 +102,18 @@ ActiveRecord::Schema.define(version: 20161129181553) do
     t.integer  "customer_id"
     t.integer  "customer_mc_id"
     t.string   "order_identifier"
-    t.decimal  "total_value",      precision: 7, scale: 2
-    t.decimal  "products_value",   precision: 7, scale: 2
-    t.decimal  "shipping_value",   precision: 7, scale: 2
-    t.decimal  "amount_paid",      precision: 7, scale: 2
+    t.decimal  "total_value",             precision: 7, scale: 2
+    t.decimal  "products_value",          precision: 7, scale: 2
+    t.decimal  "shipping_value",          precision: 7, scale: 2
+    t.decimal  "amount_paid",             precision: 7, scale: 2
     t.date     "created_on"
     t.datetime "created_on_ts"
     t.date     "paid_on"
     t.datetime "paid_on_ts"
     t.date     "shipping_on"
     t.datetime "shipping_on_ts"
+    t.date     "estimate_delivery_on"
+    t.datetime "estimate_delivery_on_ts"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -123,6 +125,23 @@ ActiveRecord::Schema.define(version: 20161129181553) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "category_name",   limit: 200
+    t.string   "category_name_1", limit: 50
+    t.string   "category_name_2", limit: 50
+    t.string   "category_name_3", limit: 50
+    t.string   "category_name_4", limit: 50
+    t.string   "category_name_5", limit: 50
+    t.string   "category_name_6", limit: 50
+    t.string   "category_name_7", limit: 50
+    t.string   "created_from",    limit: 10
+    t.decimal  "price",                       precision: 10, scale: 2
+    t.decimal  "shipping_cost",               precision: 10, scale: 2
+    t.date     "start_date"
+    t.integer  "num_impressions"
+    t.integer  "num_visits"
+    t.integer  "num_solded"
+    t.integer  "num_questions"
+    t.integer  "num_follows"
   end
 
   create_table "product_variation_mcs", force: true do |t|

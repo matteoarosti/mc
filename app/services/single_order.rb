@@ -1,36 +1,32 @@
-class Orders
+class SingleOrders
 	
- def getOrders()
- 	puts "getOrders - START"
+ def getOrder()
+ 	puts "getOrder - START"
  	
  	#puts EbayClient.api.get_ebay_official_time!.to_yaml
  	
  	channel = Channel.find(1)
 
 #	p = {number_of_days: 13, order_status: 'Completed'}
-  p = {mod_time_from: '2016-10-31T00:00:00.000Z', mod_time_to: '2016-10-31T23:59:59.999Z', order_status: 'Completed'}
-	
-  
-  for i in -27..0
-    puts (Time.now+i.days).at_beginning_of_day.utc.iso8601(3).to_s + " -> " + (Time.now+i.days).at_end_of_day.utc.iso8601(3).to_s 
-      
-    p = {mod_time_from: (Time.now+i.days).at_beginning_of_day.utc.iso8601(3), mod_time_to: (Time.now+i.days).at_end_of_day.utc.iso8601(3), order_status: 'Completed'}
+ p = {order_i_d_array: [{order_i_d: '161986631422-1485174670006'}]}
+
     orders =  EbayClient.api.get_orders! p
+
+    
+#  File.open("out_order.log", "w+") do |f|
+#    f.write(orders.to_xml)
+#  end
+#  return      
+
+        
    	
-     next if orders[:order_array].nil?
      
-     orders[:order_array][:order].each do |o|
+     
+     o = orders[:order_array][:order]
         	  
-      next if o.kind_of?(Array) 
+      #next if o.kind_of?(Array) 
        
-      
-#       File.open("out_order.log", "w+") do |f|
-#         f.write(o.to_xml)
-#       end
-#       return      
-      
-      
-      
+
    	  puts "--------------------------------------------------------------------------------------"
    		puts [
    		     o[:order_id].to_s, 
@@ -171,12 +167,8 @@ class Orders
             end  
           end
             
-       end #if new_order
-  
-   		 
-   	end  #orders.each
- 	
-  end #each day
+       end #if new_order     	 	
+
  	
  end	
 	
