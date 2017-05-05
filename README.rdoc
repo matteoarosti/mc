@@ -19,7 +19,12 @@ Things you may want to cover:
 
 * Services (job queues, cache servers, search engines, etc.)
 rails runner -e production "Orders.new.getOrders()"
-rails runner -e production "Insertions.new.getInsertions()"
+rails runner -e production "Insertions.new.getInsertions(200, 1)" #prima pagina
+rails runner -e production "Insertions.new.getInsertions(200, 2)" #seconda pagina
+rails runner -e production "Insertions.new.getInsertions(200, 3)" #seconda pagina
+rails runner -e production "Insertions.new.getInsertions(200, 4)" #seconda pagina
+
+rails runner -e production "ParseHtmlPage.new.call(10)"
 
 * Deployment instructions
 

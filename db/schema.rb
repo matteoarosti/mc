@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306234249) do
+ActiveRecord::Schema.define(version: 20170319003305) do
 
   create_table "channel_types", force: true do |t|
     t.string   "name"
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20170306234249) do
     t.string   "category_name_3", limit: 50
     t.string   "category_name_4", limit: 50
     t.string   "category_name_5", limit: 50
+    t.string   "category_name_6", limit: 50
+    t.string   "category_name_7", limit: 50
     t.string   "created_from",    limit: 10
     t.decimal  "price",                       precision: 10, scale: 2
     t.decimal  "shipping_cost",               precision: 10, scale: 2
@@ -118,6 +120,19 @@ ActiveRecord::Schema.define(version: 20170306234249) do
     t.datetime "updated_at"
   end
 
+  create_table "product_mc_tls", force: true do |t|
+    t.integer  "product_mc_id"
+    t.date     "tl_date"
+    t.integer  "tl_num_impressions"
+    t.integer  "tl_num_visits"
+    t.integer  "tl_num_transactions"
+    t.integer  "tl_num_solded"
+    t.integer  "tl_num_questions"
+    t.integer  "tl_num_follows"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "product_mcs", force: true do |t|
     t.integer  "channel_id"
     t.integer  "product_id"
@@ -125,23 +140,6 @@ ActiveRecord::Schema.define(version: 20170306234249) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "category_name",   limit: 200
-    t.string   "category_name_1", limit: 50
-    t.string   "category_name_2", limit: 50
-    t.string   "category_name_3", limit: 50
-    t.string   "category_name_4", limit: 50
-    t.string   "category_name_5", limit: 50
-    t.string   "category_name_6", limit: 50
-    t.string   "category_name_7", limit: 50
-    t.string   "created_from",    limit: 10
-    t.decimal  "price",                       precision: 10, scale: 2
-    t.decimal  "shipping_cost",               precision: 10, scale: 2
-    t.date     "start_date"
-    t.integer  "num_impressions"
-    t.integer  "num_visits"
-    t.integer  "num_solded"
-    t.integer  "num_questions"
-    t.integer  "num_follows"
   end
 
   create_table "product_variation_mcs", force: true do |t|

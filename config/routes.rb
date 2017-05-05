@@ -58,6 +58,12 @@ Rails.application.routes.draw do
   
   root to: 'homes#index'  
   
+  get '/vjs/:module/:path', to: 'vjs#show_view'
+  post '/vjs/:module/:path', to: 'vjs#show_view'
+  
+  get '/vjsc/:module/:path', to: 'vjs#show_component'
+  post '/vjsc/:module/:path', to: 'vjs#show_component'  
+  
   get ':controller(/:action(/:id))'
   post ':controller(/:action(/:id))'
   

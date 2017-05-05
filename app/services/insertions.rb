@@ -1,11 +1,11 @@
 class Insertions
 	
- def getInsertions()
+ def getInsertions(per_page, page_number)
  	puts "getOrders - START"
  	
  	channel = Channel.find(1)
   
- 	p = {pagination: {entries_per_page: 100, page_number: 1}, 
+ 	p = {pagination: {entries_per_page: per_page, page_number: page_number}, 
  	     end_time_from: (Time.now).at_beginning_of_day.utc.iso8601(3), 
  	     end_time_to:   (Time.now+120.days).at_beginning_of_day.utc.iso8601(3),
  	     detail_level: 'ReturnAll', granularity_level: 'Fine', include_watch_count: true

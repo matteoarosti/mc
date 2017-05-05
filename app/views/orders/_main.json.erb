@@ -1,0 +1,89 @@
+[
+        {
+            xtype: 'container',
+
+            itemId: 'navigationPanel',
+            
+            controller: {
+            
+                jsLoadClass: function(contentPanel, url){
+                	console.log('jsLoadClass');
+				      Ext.Ajax.request({
+				                url: url,
+				                waitMsg: 'Salvataggio in corso....',
+				                method:'POST',                     
+				                jsonData: {}, 
+				          
+				                success : function(result, request){         
+				                  json_class_code = Ext.create(Ext.decode(result.responseText));
+				                  contentPanel.setActiveItem(json_class_code);                          
+				                }, scope: this,
+				      
+				                failure: function(rec, op) {
+				                  var result = Ext.JSON.decode(op.getResponse().responseText);
+				                  Ext.MessageBox.show({
+				                                title: 'EXCEPTION',
+				                                msg: result.message,
+				                                icon: Ext.MessageBox.ERROR,
+				                                buttons: Ext.Msg.OK
+				                            })          
+				                }, scope: this,                                  
+				      });                	
+                },
+            
+			    onMenuClick: function (menu, item) {
+			    	console.log('onMenuClick');
+			    	console.log(menu);
+			    	console.log(item);
+			        var contentPanel = this.getView().up('container').down('#ordersCardPanel');
+					this.jsLoadClass(contentPanel, <%= raw url_for('/vjsc/orders/grid').to_json -%>);
+			    }            
+            },
+
+            layout: {
+                type: 'vbox',
+                align: 'stretch'
+            },
+
+            width: '30%',
+            minWidth: 180,
+            maxWidth: 240,
+
+            defaults: {
+                cls: 'navigation-email',
+                margin: '0 20 20 0'
+            },
+
+            items: [
+                {
+                    xtype: 'menu',
+                    title: 'Ordini aperti',
+                    iconCls: 'x-fa fa-inbox',
+                    floating: false,
+                    items: [
+				        {
+				            iconCls: 'x-fa fa-edit',
+				            text: 'Scaduti'
+				        }, {
+				            iconCls: 'x-fa fa-edit',
+				            text: 'Da spedire'
+				        }
+				    ],
+                    listeners: {
+                        click: 'onMenuClick'
+                    }
+                }
+            ]
+        },
+                {
+                    xtype: 'container',
+                    flex: 1,
+                    reference: 'ordersCardPanel',
+                    itemId: 'ordersCardPanel',
+                    cls: 'sencha-dash-right-main-container',
+                    layout: {
+                        type: 'card',
+                        anchor: '100%'
+                    }
+                }
+]

@@ -134,6 +134,62 @@ module ApplicationHelper
    return ret    
   end 
 
+    
+  def js_store_url(url)
+   ret = "Ext.create('Ext.data.Store', {
+           fields: [],
+           autoLoad: true,
+           proxy: {
+               type: 'ajax',
+               url: #{url.to_json},              
+               reader: {
+                   type: 'json',
+                   rootProperty: 'items',
+                   method: 'POST'
+               },
+               paramsAsJson: true,
+               method: 'POST',
+               type: 'ajax',
+          
+               //Add these two properties
+               actionMethods: {
+                 read: 'POST'
+               }                      
+                   
+           }          
+       })"
+   return raw ret    
+  end 
+  
+  
+  
+  
+  def js_ajax_load_class()
+    ret = "
+      Ext.Ajax.request({
+                url: '" +  url_for('/vjsc/orders/grid') + "',
+                waitMsg: 'Salvataggio in corso....',
+                method:'POST',                     
+                jsonData: {}, 
+          
+                success: function(op, opts) {         
+                  console.log('successsssss');                          
+                }, scope: this,
+      
+                failure: function(rec, op) {
+                  var result = Ext.JSON.decode(op.getResponse().responseText);
+                  Ext.MessageBox.show({
+                                title: 'EXCEPTION',
+                                msg: result.message,
+                                icon: Ext.MessageBox.ERROR,
+                                buttons: Ext.Msg.OK
+                            })          
+                }, scope: this,                                  
+      });"
+    raw ret     
+  end
+  
+  
   
   
   def extsj_create_attr_str(attrs)
